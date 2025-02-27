@@ -1,0 +1,10 @@
+# Unity-specific files
+/Library/
+/Logs/
+/Temp/
+/Packages/
+/ProjectSettings/
+/UserSettings/
+
+# VSCode settings
+/.vscode/
