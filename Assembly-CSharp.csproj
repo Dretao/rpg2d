@@ -71,6 +71,9 @@
     <Compile Include="Assets\PlayerMoveState.cs" />
     <Compile Include="Assets\PlayerIdleState.cs" />
     <Compile Include="Assets\PlayerWallSlideState.cs" />
+    <Compile Include="Assets\PlayerWallJumpState.cs" />
+    <Compile Include="Assets\PlayerPrimaryAttackState.cs" />
+    <Compile Include="Assets\PlayerAnimationTriggers.cs" />
     <Compile Include="Assets\PlayerJumpState.cs" />
     <Compile Include="Assets\PlayerDashState.cs" />
     <Compile Include="Assets\PlayerStateMachine.cs" />

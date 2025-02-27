@@ -22,6 +22,10 @@ public class PlayerGroundState : PlayerState
         {
             stateMachine.ChangeState(player.airState);
         }
+        if(Input.GetKeyDown(KeyCode.J))
+        {
+            stateMachine.ChangeState(player.primaryAttackState);
+        }
     }
     override public void Exit()
     {

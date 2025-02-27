@@ -18,14 +18,18 @@ public class Player : MonoBehaviour
     public PlayerAirState airState { get; private set; }
     public PlayerDashState dashState { get; private set; }
     public PlayerWallSlideState wallSlideState { get; private set; }
+    public PlayerWallJumpState wallJumpState { get; private set; }
+    public PlayerPrimaryAttackState primaryAttackState { get; private set; }
 
     #endregion
 
+    public bool isBusy { get; private set; } 
     [Header("Move info")]
     [SerializeField]public float moveSpeed = 8f;
 
     [Header("Jump info")]
     [SerializeField]public float jumpForce = 10f;
+    [SerializeField]public float wallJumpForce = 10f;
 
     [Header("Collision info")]
     [SerializeField] private Transform groundCheck;
@@ -41,6 +45,9 @@ public class Player : MonoBehaviour
     [SerializeField] public float dashUsageTimer;
     public float dashDir { get; private set; }
 
+    [Header("attack details")]
+    public Vector2[] attackMovement;
+
 
     public int facingDir{ get; private set; } = 1;
     private bool isFacingRight = true;
@@ -54,6 +61,8 @@ public class Player : MonoBehaviour
         airState = new PlayerAirState(this, stateMachine, "jump");
         dashState = new PlayerDashState(this, stateMachine, "dash");
         wallSlideState = new PlayerWallSlideState(this, stateMachine, "wallSlide");
+        wallJumpState = new PlayerWallJumpState(this, stateMachine, "jump");
+        primaryAttackState = new PlayerPrimaryAttackState(this, stateMachine, "attack");
     }
 
     private void Start()
@@ -68,11 +77,14 @@ public class Player : MonoBehaviour
         stateMachine.currentState.Update();
         CheckForDashInput();
         dashUsageTimer -= Time.deltaTime;
-        Debug.Log(isWallDetected());
     }
 
     private void CheckForDashInput()
     {
+        if(isWallDetected())
+        {
+            return;
+        }
         if(Input.GetKeyDown(KeyCode.LeftShift)&&dashUsageTimer < 0)
         {
             dashUsageTimer = dashCoolDown;
@@ -84,11 +96,19 @@ public class Player : MonoBehaviour
             stateMachine.ChangeState(dashState);
         }
     }
+    #region Velocity
     public void SetVelocity(float _xVelocity,float _yVelocity)
     {
         rb.velocity = new Vector2(_xVelocity, _yVelocity);
         FlipController(_xVelocity);
     }
+    public void SetZeroVelocity()
+    {
+        rb.velocity = Vector2.zero;
+    }
+    #endregion
+    
+    #region Collision
     public bool IsGroundDetected()
     {
         return Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
@@ -102,7 +122,9 @@ public class Player : MonoBehaviour
         Gizmos.DrawLine(groundCheck.position, new Vector2(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
         Gizmos.DrawLine(wallCheck.position, new Vector2(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));
     }
+    #endregion
 
+    #region Flip 
     public void Flip()
     {
         facingDir *= -1;
@@ -119,5 +141,18 @@ public class Player : MonoBehaviour
         {
             Flip();
         }
+    }
+    #endregion
+    public void AnimationTrigger()
+    {
+        stateMachine.currentState.AnimationFinishTrigger();
+    }
+    public IEnumerator BusyFor(float _scends)
+    {
+        isBusy = true;
+
+        yield return new WaitForSeconds(_scends);
+
+        isBusy = false;
     }
 }

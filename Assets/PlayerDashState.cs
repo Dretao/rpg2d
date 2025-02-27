@@ -18,7 +18,10 @@ public class PlayerDashState : PlayerState
     public override void Update()
     {
         base.Update();
-
+        if(!player.IsGroundDetected()&&player.isWallDetected())
+        {
+            stateMachine.ChangeState(player.wallSlideState);
+        }
         rb.velocity = new Vector2(player.dashSpeed * player.dashDir, 0);
         if(stateTimer < 0)
         {
