@@ -13,6 +13,6 @@ public class why : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        hhhh;iiiiidont
     }
 }
