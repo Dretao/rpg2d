@@ -248,9 +248,9 @@ MonoBehaviour:
   dashCoolDown: 1
   dashUsageTimer: 0
   attackMovement:
-  - 2
-  - 1
-  - 3
+  - {x: 3, y: 1.5}
+  - {x: 1, y: 2.5}
+  - {x: 4, y: 1.5}
 --- !u!1 &311027176
 GameObject:
   m_ObjectHideFlags: 0
