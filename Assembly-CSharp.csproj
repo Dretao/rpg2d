@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\PlayerAirState.cs" />
     <Compile Include="Assets\Scripts\PlayerGroundState.cs" />
     <Compile Include="Assets\justatry.cs" />
+    <Compile Include="Assets\why.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerDashState.cs" />
     <Compile Include="Assets\Scripts\PlayerState.cs" />
