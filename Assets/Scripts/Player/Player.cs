@@ -24,8 +24,9 @@ public class Player : Entity
     [SerializeField]public float moveSpeed = 8f;
 
     [Header("Jump info")]
-    [SerializeField]public float jumpForce = 10f;
+    [SerializeField]public float jumpForce;
     [SerializeField]public float wallJumpForce = 10f;
+    [SerializeField]public float lowJumpMultiplier;
 
     
 
@@ -38,6 +39,7 @@ public class Player : Entity
 
     [Header("attack details")]
     public Vector2[] attackMovement;
+
 
 
     

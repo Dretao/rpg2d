@@ -10,11 +10,15 @@ public class PlayerJumpState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        rb.velocity = new Vector2(rb.velocity.x, player.jumpForce);       
+        rb.AddForce(Vector2.up * player.jumpForce, ForceMode2D.Impulse);       
     }
     public override void Update()
     {
         base.Update();
+        if(rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (player.lowJumpMultiplier - 1) * Time.deltaTime;
+        }
         if(rb.velocity.y < 0)
         {
             stateMachine.ChangeState(player.airState);
