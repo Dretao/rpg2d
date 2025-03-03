@@ -313,8 +313,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   moveSpeed: 8
-  jumpForce: 12
+  jumpForce: 15
   wallJumpForce: 10
+  lowJumpMultiplier: 7
   dashTime: 0.2
   dashSpeed: 25
   dashCoolDown: 1

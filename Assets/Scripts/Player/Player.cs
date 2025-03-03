@@ -27,6 +27,7 @@ public class Player : Entity
     [SerializeField]public float jumpForce;
     [SerializeField]public float wallJumpForce = 10f;
     [SerializeField]public float lowJumpMultiplier;
+    [SerializeField]public float fallMultiplier;
 
     
 

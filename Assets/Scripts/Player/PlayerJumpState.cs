@@ -15,7 +15,7 @@ public class PlayerJumpState : PlayerState
     public override void Update()
     {
         base.Update();
-        if(rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+        if(rb.velocity.y > 0 && !Input.GetButton("Jump"))
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (player.lowJumpMultiplier - 1) * Time.deltaTime;
         }

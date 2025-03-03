@@ -26,6 +26,7 @@ public class PlayerAirState : PlayerState
         {
             player.SetVelocity(player.moveSpeed *.8f * xInput, rb.velocity.y);
         }
+        rb.velocity += Vector2.up * Physics2D.gravity.y * (player.fallMultiplier - 1) * Time.deltaTime;
     }
     public override void Exit()
     {
