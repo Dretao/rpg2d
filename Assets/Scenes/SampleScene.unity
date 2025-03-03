@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 141833715}
   - component: {fileID: 141833714}
   - component: {fileID: 141833717}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +263,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 3.5
+  m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: 1955b12652b5d9243a154c213a2b4c19, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -313,9 +313,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   moveSpeed: 8
-  jumpForce: 15
+  jumpForce: 12
   wallJumpForce: 10
-  lowJumpMultiplier: 7
+  lowJumpMultiplier: 5
+  fallMultiplier: 4
   dashTime: 0.2
   dashSpeed: 25
   dashCoolDown: 1
@@ -333,7 +334,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 256264523}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -366,7 +367,8 @@ GameObject:
   - component: {fileID: 308197809}
   - component: {fileID: 308197811}
   - component: {fileID: 308197810}
-  m_Layer: 0
+  - component: {fileID: 308197812}
+  m_Layer: 7
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -461,6 +463,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &308197812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308197808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c7e8899bb2c54c49acb067a438efbfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &311027176
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,7 +484,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 311027177}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -588,7 +602,7 @@ GameObject:
   - component: {fileID: 482422700}
   - component: {fileID: 482422701}
   - component: {fileID: 482422702}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -919,7 +933,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 567342123}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1536,8 +1550,8 @@ GameObject:
   - component: {fileID: 1279682296}
   - component: {fileID: 1279682295}
   - component: {fileID: 1279682294}
-  m_Layer: 0
-  m_Name: Enemy_skeleton
+  m_Layer: 7
+  m_Name: Enemy_Skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1630,12 +1644,20 @@ MonoBehaviour:
   groundCheck: {fileID: 256264523}
   groundCheckDistance: 0.13
   wallCheck: {fileID: 2087133364}
-  wallCheckDistance: 0.76
+  wallCheckDistance: 1.1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 64
   moveSpeed: 1.5
   idleTime: 1
+  battleTime: 7
+  attackDistance: 1.25
+  attackCooldown: 0.4
+  detectDistance: 15
+  lastTimeAttacked: 0
 --- !u!4 &1279682297
 Transform:
   m_ObjectHideFlags: 0
@@ -1645,9 +1667,9 @@ Transform:
   m_GameObject: {fileID: 1279682293}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.2315035, y: 0.025, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 4.2315035, y: 0.4, z: 0}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 308197809}
   - {fileID: 256264523}
@@ -4148,7 +4170,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2087133364}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4164,7 +4186,7 @@ Transform:
   m_GameObject: {fileID: 2087133363}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.231, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
