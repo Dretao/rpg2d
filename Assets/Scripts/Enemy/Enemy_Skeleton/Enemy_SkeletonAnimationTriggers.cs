@@ -20,4 +20,12 @@ public class Enemy_SkeletonAnimationTriggers : MonoBehaviour
             }
         }
     }
+    private void OpenCounterAttackWindow()
+    {
+        skeleton.OpenCounterAttackWindow();
+    }
+    private void CloseCounterAttackWindow()
+    {
+        skeleton.CloseCounterAttackWindow();
+    }
 }

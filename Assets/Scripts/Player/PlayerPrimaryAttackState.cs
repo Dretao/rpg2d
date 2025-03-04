@@ -14,6 +14,7 @@ public class PlayerPrimaryAttackState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        xInput = 0;//reset xinput
         if(comboCount > 2  || Time.time - lastAttacked > comboWindow)
         {
             comboCount = 0;

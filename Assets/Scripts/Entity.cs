@@ -12,6 +12,10 @@ public class Entity : MonoBehaviour
 
     #endregion
 
+    [Header("Knockback Info")]
+    [SerializeField] protected Vector2 knockbackDir;
+    protected bool isKnocked;
+
     public Transform attackCheck;
     public float attackCheckRadius;
     [Header("Collision info")]
@@ -81,18 +85,35 @@ public class Entity : MonoBehaviour
     #region Velocity
     public void SetVelocity(float _xVelocity,float _yVelocity)
     {
+        if(isKnocked)
+        {
+            return;
+        }
         rb.velocity = new Vector2(_xVelocity, _yVelocity);
         FlipController(_xVelocity);
     }
     public void SetZeroVelocity()
     {
         rb.velocity = Vector2.zero;
+        if(isKnocked)
+        {
+            return;
+        }
     }
     #endregion
 
     public virtual void Damage()
     {
         fX.StartCoroutine("FlashFX");
+        StartCoroutine("HitKnockback");
         Debug.Log(gameObject.name+"was damaged!");
+    }
+
+    protected virtual IEnumerator HitKnockback()
+    {
+        isKnocked = true;
+        rb.velocity = new Vector2(knockbackDir.x * -facingDir, knockbackDir.y);
+        yield return new WaitForSeconds(0.07f);//knockback duration
+        isKnocked = false;
     }
 }
