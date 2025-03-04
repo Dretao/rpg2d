@@ -40,9 +40,6 @@ public class Player : Entity
 
     [Header("attack details")]
     public Vector2[] attackMovement;
-
-
-
     
 
     protected override void Awake()

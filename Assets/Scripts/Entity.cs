@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
@@ -7,9 +8,12 @@ public class Entity : MonoBehaviour
     #region Components
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
+    public EntityFX fX { get; private set; }
 
     #endregion
 
+    public Transform attackCheck;
+    public float attackCheckRadius;
     [Header("Collision info")]
     [SerializeField] protected Transform groundCheck;
     [SerializeField] protected float groundCheckDistance;
@@ -27,6 +31,7 @@ public class Entity : MonoBehaviour
 
     protected virtual void Start()
     {
+        fX = GetComponent<EntityFX>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
     }
@@ -49,6 +54,7 @@ public class Entity : MonoBehaviour
     {
         Gizmos.DrawLine(groundCheck.position, new Vector2(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
         Gizmos.DrawLine(wallCheck.position, new Vector2(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));
+        Gizmos.DrawWireSphere(attackCheck.position, attackCheckRadius);
     }
     #endregion
 
@@ -83,4 +89,10 @@ public class Entity : MonoBehaviour
         rb.velocity = Vector2.zero;
     }
     #endregion
+
+    public virtual void Damage()
+    {
+        fX.StartCoroutine("FlashFX");
+        Debug.Log(gameObject.name+"was damaged!");
+    }
 }
