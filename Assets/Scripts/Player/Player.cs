@@ -35,8 +35,6 @@ public class Player : Entity
     [Header("Dash info")]
     [SerializeField] public float dashTime = 1.5f;
     [SerializeField] public float dashSpeed = 15f;
-    [SerializeField] public float dashCoolDown;
-    [SerializeField] public float dashUsageTimer;
     public float dashDir { get; private set; }
 
     [Header("attack details")]
@@ -70,7 +68,6 @@ public class Player : Entity
         base.Update();
         stateMachine.currentState.Update();
         CheckForDashInput();
-        dashUsageTimer -= Time.deltaTime;
     }
 
     private void CheckForDashInput()
@@ -79,9 +76,8 @@ public class Player : Entity
         {
             return;
         }
-        if(Input.GetKeyDown(KeyCode.LeftShift)&&dashUsageTimer < 0)
+        if(Input.GetKeyDown(KeyCode.LeftShift)&&SkillManager.instance.dash.CanUseSkill())
         {
-            dashUsageTimer = dashCoolDown;
             dashDir = Input.GetAxisRaw("Horizontal");
             if(dashDir == 0)
             {
