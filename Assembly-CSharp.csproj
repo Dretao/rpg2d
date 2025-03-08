@@ -67,28 +67,29 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Entity.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerGroundState.cs" />
+    <Compile Include="Assets\Scripts\Skill\SkillManager.cs" />
     <Compile Include="Assets\Scripts\Enemy\Enemy_Skeleton\SkeletonIdleState.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerWallSlideState.cs" />
-    <Compile Include="Assets\Scripts\SkillManager.cs" />
+    <Compile Include="Assets\Scripts\Skill\Clone_Skill.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerDashState.cs" />
     <Compile Include="Assets\Scripts\Enemy\Enemy_Skeleton\SkeletonMoveState.cs" />
     <Compile Include="Assets\Scripts\Enemy\Enemy_Skeleton\Enemy_SkeletonAnimationTriggers.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyState.cs" />
-    <Compile Include="Assets\Scripts\Dash_Skill.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerJumpState.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCounterAttackState.cs" />
     <Compile Include="Assets\Scripts\Enemy\Enemy_Skeleton\SkeletonStunnedState.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerPrimaryAttackState.cs" />
-    <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\EntityFX.cs" />
+    <Compile Include="Assets\Scripts\Clone_Skill_Controller.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\parallax background.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerWallJumpState.cs" />
+    <Compile Include="Assets\Scripts\Skill\Dash_Skill.cs" />
     <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemy\Enemy_Skeleton\SkeletonAttackState.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyStateMachine.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMoveState.cs" />
-    <Compile Include="Assets\Scripts\Skill.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerAnimationTriggers.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerIdleState.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Assets\Scripts\Enemy\Enemy_Skeleton\SkeletonBattleState.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerAirState.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStateMachine.cs" />
+    <Compile Include="Assets\Scripts\Skill\Skill.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

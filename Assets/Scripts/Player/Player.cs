@@ -20,6 +20,8 @@ public class Player : Entity
 
     #endregion
 
+    public SkillManager skill{get; private set;}
+
     public bool isBusy { get; private set; } 
     [Header("Move info")]
     [SerializeField]public float moveSpeed = 8f;
@@ -61,6 +63,7 @@ public class Player : Entity
     {
         base.Start();
         stateMachine.Initialize(idleState);
+        skill = SkillManager.instance;
     }
 
     protected override void Update()
