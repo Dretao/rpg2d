@@ -26,9 +26,13 @@ public class PlayerGroundState : PlayerState
         {
             stateMachine.ChangeState(player.primaryAttackState);
         }
-        if(Input.GetKeyDown(KeyCode.Q))
+        if(Input.GetKeyDown(KeyCode.K))
         {
             stateMachine.ChangeState(player.counterAttackState);
+        }
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            stateMachine.ChangeState(player.aimSwordState);
         }
     }
     override public void Exit()

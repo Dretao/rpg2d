@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Skill : MonoBehaviour
@@ -7,6 +8,11 @@ public class Skill : MonoBehaviour
     [SerializeField] protected float cooldown;
     protected float cooldownTimer;
 
+    protected Player player;
+    private void Start()
+    {
+        player = PlayerManager.instance.player;
+    }
 
     protected virtual void Update()
     {
