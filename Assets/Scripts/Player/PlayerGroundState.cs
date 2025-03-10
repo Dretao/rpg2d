@@ -30,10 +30,19 @@ public class PlayerGroundState : PlayerState
         {
             stateMachine.ChangeState(player.counterAttackState);
         }
-        if(Input.GetKeyDown(KeyCode.L))
+        if(Input.GetKeyDown(KeyCode.L) && HasNoSword())
         {
             stateMachine.ChangeState(player.aimSwordState);
         }
+    }
+    private bool HasNoSword()
+    {
+        if(!player.sword)
+        {
+            return true;
+        }
+        player.sword.GetComponent<Sword_Skill_Controller>().ReturnSword();
+        return false;
     }
     override public void Exit()
     {

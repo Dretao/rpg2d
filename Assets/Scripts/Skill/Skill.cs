@@ -27,7 +27,6 @@ public class Skill : MonoBehaviour
             cooldownTimer = cooldown;
             return true;
         }
-        Debug.Log("Skill is on cooldown");
         return false;
     }
 

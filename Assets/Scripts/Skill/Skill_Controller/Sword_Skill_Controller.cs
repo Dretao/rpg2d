@@ -1,42 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Sword_Skill_Controller : MonoBehaviour
 {
+    [SerializeField] private float returnSpeed; // 返回速度
     private Animator anim;
     private Rigidbody2D rb;
     private CircleCollider2D cd;
+    private Player player;
     private int facingDir;
+    private bool canRotate = true;
+    private bool isReturning = false;
 
     [SerializeField] private float detectionRadius = 5f; // 检测敌人的半径
     [SerializeField] private LayerMask enemyLayer; // 敌人所在的层
     [SerializeField] private float initialSpeed = 5f; // 初始速度
 
-    private void Start()
+    private void Awake()
     {
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         cd = GetComponent<CircleCollider2D>();
-
-        // 检查组件是否正确获取
-        if (anim == null)
-        {
-            Debug.LogError("Animator component not found!");
-        }
-        if (rb == null)
-        {
-            Debug.LogError("Rigidbody2D component not found!");
-        }
-        if (cd == null)
-        {
-            Debug.LogError("CircleCollider2D component not found!");
-        }
     }
 
-    public void SetupSword(float _gravityScale, int _facingDir)
+    private void Update()
     {
-        rb = GetComponent<Rigidbody2D>();
+        if(canRotate)
+            transform.right = rb.velocity;
+        if(isReturning)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, returnSpeed * Time.deltaTime);
+            if(Vector2.Distance(transform.position, player.transform.position) < 0.1f)
+            {
+                player.CatchTheSword();
+            }
+        }
+    }
+    public void SetupSword(float _gravityScale, int _facingDir, Player _player)
+    {
+        player = _player;
+        anim.SetBool("rotation", true);
         if (rb != null)
         {
             rb.gravityScale = _gravityScale;
@@ -49,11 +54,17 @@ public class Sword_Skill_Controller : MonoBehaviour
         }
 
         facingDir = _facingDir;
-
         // 启动自动寻敌功能
         StartCoroutine(AutoSeekEnemy());
     }
-
+    public void ReturnSword()
+    {
+        anim.SetBool("rotation", true);
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        //rb.isKinematic = false;
+        transform.parent = null;
+        isReturning = true;
+    }
     private IEnumerator AutoSeekEnemy()
     {
         while (true)
@@ -97,5 +108,19 @@ public class Sword_Skill_Controller : MonoBehaviour
             }
         }
         return nearestEnemy;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(isReturning)
+        {
+            return;
+        }
+        anim.SetBool("rotation", false);
+        canRotate = false;
+        cd.enabled = false;
+        rb.isKinematic = true;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+
+        transform.parent = collision.transform;
     }
 }

@@ -23,7 +23,7 @@ public class Player : Entity
     #endregion
 
     public SkillManager skill{get; private set;}
-
+    public GameObject sword{get; private set;}
     public bool isBusy { get; private set; } 
     [Header("Move info")]
     [SerializeField]public float moveSpeed = 8f;
@@ -111,5 +111,14 @@ public class Player : Entity
         yield return new WaitForSeconds(_scends);
 
         isBusy = false;
+    }
+    public void AssignNewSword(GameObject _newsword)
+    {
+        sword = _newsword;
+    }
+    public void CatchTheSword()
+    {
+        stateMachine.ChangeState(catchSwordState);
+        Destroy(sword);
     }
 }

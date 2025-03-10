@@ -17,7 +17,7 @@ public class Sword_Skill : Skill
             Debug.LogError("Sword_Skill_Controller component not found on the instantiated swordPrefab!");
             return;
         }
-
-        newSwordScript.SetupSword(swordGravity, player.facingDir);
+        player.AssignNewSword(newSword);
+        newSwordScript.SetupSword(swordGravity, player.facingDir, player);
     }
 }
