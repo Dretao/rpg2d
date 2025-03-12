@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerAnimationTriggers : MonoBehaviour
@@ -19,6 +20,8 @@ public class PlayerAnimationTriggers : MonoBehaviour
             if(hit.GetComponent<Enemy>() != null)
             {
                 hit.GetComponent<Enemy>().Damage();
+                AttackSense.Instance.HitPause(player.hitPauseTime);
+                AttackSense.Instance.CameraShake(player.shakeTime,player.shakeStrength);
             }
         }
     }

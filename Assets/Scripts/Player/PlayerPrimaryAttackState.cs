@@ -7,7 +7,7 @@ public class PlayerPrimaryAttackState : PlayerState
 {
     private int comboCount = 0;
     private float lastAttacked;
-    private float comboWindow = 2;
+    private float comboWindow = 2;//允许连续攻击的时间窗口
     public PlayerPrimaryAttackState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
     }
@@ -18,6 +18,7 @@ public class PlayerPrimaryAttackState : PlayerState
         if(comboCount > 2  || Time.time - lastAttacked > comboWindow)
         {
             comboCount = 0;
+            player.attackCheckRadius = 1.05f;
         }
         player.anim.SetInteger("ComboCount", comboCount);
 
@@ -43,6 +44,18 @@ public class PlayerPrimaryAttackState : PlayerState
         if(triggerCalled)
         {
             stateMachine.ChangeState(player.idleState);
+        }
+        if(comboCount == 0)
+        {
+            player.attackCheckRadius = 1.05f;
+        }
+        else if(comboCount == 1)
+        {
+            player.attackCheckRadius = 0.8f;
+        }
+        else if(comboCount == 2)
+        {
+            player.attackCheckRadius = 1.42f;
         }
     }
     public override void Exit()

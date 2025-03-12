@@ -22,6 +22,11 @@ public class Player : Entity
 
     #endregion
 
+    [Header("打击感")]
+    public float shakeStrength;
+    public float hitPauseTime;
+    public float shakeTime;
+
     public SkillManager skill{get; private set;}
     public GameObject sword{get; private set;}
     public bool isBusy { get; private set; } 
@@ -44,7 +49,6 @@ public class Player : Entity
     [Header("attack details")]
     public Vector2[] attackMovement;
     public float couterAttackDuration = .2f;
-    
 
     protected override void Awake()
     {
@@ -121,4 +125,5 @@ public class Player : Entity
         stateMachine.ChangeState(catchSwordState);
         Destroy(sword);
     }
+
 }
